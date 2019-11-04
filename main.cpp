@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include <tuple>
-#include "templates.h"
+#include "src/templates.h"
 int main() {
     std::string command;
     while (std::cin >> command) {

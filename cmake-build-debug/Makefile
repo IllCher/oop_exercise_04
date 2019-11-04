@@ -55,6 +55,42 @@ CMAKE_BINARY_DIR = D:\Study\Labs2course\oop_exercise_04\cmake-build-debug
 #=============================================================================
 # Targets provided globally by CMake.
 
+# Special rule for the target install/strip
+install/strip: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	"D:\Utilities\CLion 2019.2.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip
+
+# Special rule for the target install/strip
+install/strip/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing the project stripped..."
+	"D:\Utilities\CLion 2019.2.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_INSTALL_DO_STRIP=1 -P cmake_install.cmake
+.PHONY : install/strip/fast
+
+# Special rule for the target install/local
+install/local: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	"D:\Utilities\CLion 2019.2.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local
+
+# Special rule for the target install/local
+install/local/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Installing only the local directory..."
+	"D:\Utilities\CLion 2019.2.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_INSTALL_LOCAL_ONLY=1 -P cmake_install.cmake
+.PHONY : install/local/fast
+
+# Special rule for the target install
+install: preinstall
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	"D:\Utilities\CLion 2019.2.2\bin\cmake\win\bin\cmake.exe" -P cmake_install.cmake
+.PHONY : install
+
+# Special rule for the target install
+install/fast: preinstall/fast
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Install the project..."
+	"D:\Utilities\CLion 2019.2.2\bin\cmake\win\bin\cmake.exe" -P cmake_install.cmake
+.PHONY : install/fast
+
 # Special rule for the target edit_cache
 edit_cache:
 	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "No interactive CMake dialog available..."
@@ -76,6 +112,16 @@ rebuild_cache:
 rebuild_cache/fast: rebuild_cache
 
 .PHONY : rebuild_cache/fast
+
+# Special rule for the target list_install_components
+list_install_components:
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --cyan "Available install components are: \"Unspecified\""
+.PHONY : list_install_components
+
+# Special rule for the target list_install_components
+list_install_components/fast: list_install_components
+
+.PHONY : list_install_components/fast
 
 # The main all target
 all: cmake_check_build_system
@@ -122,6 +168,71 @@ oop_exercise_04/fast:
 	$(MAKE) -f CMakeFiles\oop_exercise_04.dir\build.make CMakeFiles/oop_exercise_04.dir/build
 .PHONY : oop_exercise_04/fast
 
+#=============================================================================
+# Target rules for targets named oop_exercise_04_test
+
+# Build rule for target.
+oop_exercise_04_test: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 oop_exercise_04_test
+.PHONY : oop_exercise_04_test
+
+# fast build rule for target.
+oop_exercise_04_test/fast:
+	$(MAKE) -f CMakeFiles\oop_exercise_04_test.dir\build.make CMakeFiles/oop_exercise_04_test.dir/build
+.PHONY : oop_exercise_04_test/fast
+
+#=============================================================================
+# Target rules for targets named gmock_main
+
+# Build rule for target.
+gmock_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 gmock_main
+.PHONY : gmock_main
+
+# fast build rule for target.
+gmock_main/fast:
+	$(MAKE) -f lib\googletest\googlemock\CMakeFiles\gmock_main.dir\build.make lib/googletest/googlemock/CMakeFiles/gmock_main.dir/build
+.PHONY : gmock_main/fast
+
+#=============================================================================
+# Target rules for targets named gmock
+
+# Build rule for target.
+gmock: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 gmock
+.PHONY : gmock
+
+# fast build rule for target.
+gmock/fast:
+	$(MAKE) -f lib\googletest\googlemock\CMakeFiles\gmock.dir\build.make lib/googletest/googlemock/CMakeFiles/gmock.dir/build
+.PHONY : gmock/fast
+
+#=============================================================================
+# Target rules for targets named gtest
+
+# Build rule for target.
+gtest: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 gtest
+.PHONY : gtest
+
+# fast build rule for target.
+gtest/fast:
+	$(MAKE) -f lib\googletest\googletest\CMakeFiles\gtest.dir\build.make lib/googletest/googletest/CMakeFiles/gtest.dir/build
+.PHONY : gtest/fast
+
+#=============================================================================
+# Target rules for targets named gtest_main
+
+# Build rule for target.
+gtest_main: cmake_check_build_system
+	$(MAKE) -f CMakeFiles\Makefile2 gtest_main
+.PHONY : gtest_main
+
+# fast build rule for target.
+gtest_main/fast:
+	$(MAKE) -f lib\googletest\googletest\CMakeFiles\gtest_main.dir\build.make lib/googletest/googletest/CMakeFiles/gtest_main.dir/build
+.PHONY : gtest_main/fast
+
 main.obj: main.cpp.obj
 
 .PHONY : main.obj
@@ -149,18 +260,57 @@ main.cpp.s:
 	$(MAKE) -f CMakeFiles\oop_exercise_04.dir\build.make CMakeFiles/oop_exercise_04.dir/main.cpp.s
 .PHONY : main.cpp.s
 
+test/test.obj: test/test.cpp.obj
+
+.PHONY : test/test.obj
+
+# target to build an object file
+test/test.cpp.obj:
+	$(MAKE) -f CMakeFiles\oop_exercise_04_test.dir\build.make CMakeFiles/oop_exercise_04_test.dir/test/test.cpp.obj
+.PHONY : test/test.cpp.obj
+
+test/test.i: test/test.cpp.i
+
+.PHONY : test/test.i
+
+# target to preprocess a source file
+test/test.cpp.i:
+	$(MAKE) -f CMakeFiles\oop_exercise_04_test.dir\build.make CMakeFiles/oop_exercise_04_test.dir/test/test.cpp.i
+.PHONY : test/test.cpp.i
+
+test/test.s: test/test.cpp.s
+
+.PHONY : test/test.s
+
+# target to generate assembly for a file
+test/test.cpp.s:
+	$(MAKE) -f CMakeFiles\oop_exercise_04_test.dir\build.make CMakeFiles/oop_exercise_04_test.dir/test/test.cpp.s
+.PHONY : test/test.cpp.s
+
 # Help Target
 help:
 	@echo The following are some of the valid targets for this Makefile:
 	@echo ... all (the default if no target is provided)
 	@echo ... clean
 	@echo ... depend
+	@echo ... install/strip
 	@echo ... oop_exercise_04
+	@echo ... oop_exercise_04_test
+	@echo ... install/local
+	@echo ... install
 	@echo ... edit_cache
 	@echo ... rebuild_cache
+	@echo ... list_install_components
+	@echo ... gmock_main
+	@echo ... gmock
+	@echo ... gtest
+	@echo ... gtest_main
 	@echo ... main.obj
 	@echo ... main.i
 	@echo ... main.s
+	@echo ... test/test.obj
+	@echo ... test/test.i
+	@echo ... test/test.s
 .PHONY : help
 
 
