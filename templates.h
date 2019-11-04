@@ -24,13 +24,13 @@ struct TTriangle {
     vertex A, B, C;
     TTriangle(T x1, T y1, T x2, T y2, T x3, T y3) :
             A(x1, y1), B(x2, y2), C(x3, y3)
-    {       /* typename T::type l, k, p;
-        l = static_cast<typename T::type>(sqrt((A.first - B.first) * (A.first - B.first) + (A.second - B.second) * (A.second - B.second)));
-        k = static_cast<typename T::type>(sqrt((B.first - C.first) * (B.first - C.first) + (B.second - C.second) * (B.second - C.second)));
-        p = static_cast<typename T::type>(sqrt((C.first - B.first) * (C.first - B.first) + (C.second - B.second) * (C.second - B.second)));
+    {
+        T l = (sqrt((A.first - B.first) * (A.first - B.first) + (A.second - B.second) * (A.second - B.second)));
+        T k = (sqrt((B.first - C.first) * (B.first - C.first) + (B.second - C.second) * (B.second - C.second)));
+        T p = (sqrt((C.first - B.first) * (C.first - B.first) + (C.second - B.second) * (C.second - B.second)));
         if (l + k <= p || l + p <= k || p + k <= l) {
             throw std::logic_error("Triangle doesn't exist");
-        }*/
+        }
     }
 
 };
@@ -139,8 +139,8 @@ void print(const TSquare<T>& s) {
 }
 
 template <class T>
-T area(const std::tuple<std::pair<T,T>, std::pair<T,T>, std::pair<T,T>>&tTriangle) {
-    return absolute(((std::get<0>(tTriangle).first - std::get<2>(tTriangle).first) * ( std::get<1>(tTriangle).second - std::get<2>(tTriangle).second) - (std::get<1>(tTriangle).first - std::get<2>(tTriangle).first) * std::get<1>(tTriangle).second - std::get<2>(tTriangle).second)) / 2;
+T area(const std::tuple<std::pair<T,T>, std::pair<T,T>, std::pair<T,T>>& tTriangle) {
+    return absolute(((std::get<0>(tTriangle).first - std::get<2>(tTriangle).first) * (std::get<1>(tTriangle).second - std::get<2>(tTriangle).second) - (std::get<1>(tTriangle).first - std::get<2>(tTriangle).first) * (std::get<0>(tTriangle).second - std::get<2>(tTriangle).second)) / 2);
 }
 
 template <class T>
