@@ -1,0 +1,26 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/main.cpp
+iostream
+-
+tuple
+-
+triangle.h
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/triangle.h
+templates.h
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/templates.h
+
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/templates.h
+type_traits
+-
+vertex.h
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/vertex.h
+
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/triangle.h
+
