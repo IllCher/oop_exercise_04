@@ -29,14 +29,14 @@ TEST(TemplateAreaTest, TestingAreaSquare) {
 }
 
 TEST(TemplateCenterTest, TestingCenterTriangle) {
-    TTriangle<int> triangle1(0, 1, 2, -1, -2, -1);
+    TTriangle<int> triangle1(2, 2, 3, 0, -2, 1);
     std::pair pair1 = center(triangle1);
-    EXPECT_EQ(pair1.first, 4);
-    EXPECT_EQ(pair1.second, 4);
-    TTriangle<double> triangle2(0, 1, 2, -1, -2, -1);
+    EXPECT_EQ(pair1.first, 1);
+    EXPECT_EQ(pair1.second, 1);
+    TTriangle<double> triangle2(1, 1, 2, -1, -2, -1);
     std::pair pair2 = center(triangle2);
-    EXPECT_DOUBLE_EQ(pair2.first, 4);
-    EXPECT_DOUBLE_EQ(pair2.second, 4);
+    EXPECT_DOUBLE_EQ(pair2.first, 0.33333333333333331);
+    EXPECT_DOUBLE_EQ(pair2.second, -0.33333333333333331);
 }
 
 TEST(TemplateCenterTest, TestingCenterOctagon) {
