@@ -27,6 +27,25 @@ TEST(TemplateAreaTest, TestingAreaSquare) {
     TSquare<double> square2(2, 0, -2, 0);
     EXPECT_DOUBLE_EQ(area(square2), 8);
 }
+
+TEST(TemplateCenterTest, TestingCenterTriangle) {
+    TTriangle<int> triangle1(0, 1, 2, -1, -2, -1);
+    std::pair pair1 = center(triangle1);
+    EXPECT_EQ(pair1.first, 4);
+    EXPECT_EQ(pair1.second, 4);
+    TTriangle<double> triangle2(0, 1, 2, -1, -2, -1);
+    std::pair pair2 = center(triangle2);
+    EXPECT_DOUBLE_EQ(pair2.first, 4);
+    EXPECT_DOUBLE_EQ(pair2.second, 4);
+}
+
+TEST(TemplateCenterTest, TestingCenterOctagon) {
+
+}
+
+TEST(TemplateCenterTest, TestingCenterSquare) {
+
+}
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
     return RUN_ALL_TESTS();
