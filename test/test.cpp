@@ -70,21 +70,25 @@ TEST(TemplateCenterTest, TestingCenterSquare) {
 }
 
 TEST(TemplateAreaTestTuple, TestingAreaTuple) {
-    using vertex = std::pair<int, int>;
+    using vertex1 = std::pair<int, int>;
+    using vertex2 = std::pair<double, double>;
     using std::make_pair;
     using std::get;
-    std::tuple<vertex, vertex> tSquare(make_pair(1.1, 2.2), make_pair(3.3, 6.6));
-    EXPECT_EQ(get<0>(tSquare).first, 1);
-    EXPECT_EQ(get<0>(tSquare).second, 2);
-    EXPECT_EQ(get<1>(tSquare).first, 3);
-    EXPECT_EQ(get<1>(tSquare).second, 6);
-    std::tuple<vertex, vertex, vertex> tTriangle(make_pair(1.1, 2.2), make_pair(3.3, 6.6));
-    EXPECT_EQ(get<0>(tTriangle).first, 1);
-    EXPECT_EQ(get<0>(tTriangle).second, 2);
-    EXPECT_EQ(get<1>(tTriangle).first, 3);
-    EXPECT_EQ(get<1>(tTriangle).second, 6);
-    EXPECT_EQ(get<2>(tTriangle).first, 1);
-    EXPECT_EQ(get<2>(tTriangle).second, 2);
+
+    std::tuple<vertex1, vertex1> tSquareI1(make_pair(2, 0), make_pair(-2, 0));
+    EXPECT_EQ(area(tSquareI1), 8);
+    std::tuple<vertex1, vertex1> tSquareI2(make_pair(0, 0), make_pair(0, 1));
+    EXPECT_DOUBLE_EQ(area(tSquareI2), 0.5);
+    std::tuple<vertex2, vertex2> tSquareD(make_pair(2.5, 1), make_pair(-2.5, 3.5));
+    EXPECT_DOUBLE_EQ(area(tSquareD), 15.625);
+
+    std::tuple<vertex1, vertex1, vertex1> tTriangleI1(make_pair(0, 1), make_pair(2, -1) , make_pair(-2,-1));
+    EXPECT_EQ(area(tTriangleI1), 0);
+    std::tuple<vertex1, vertex1, vertex1> tTriangleI2(make_pair(0, 0), make_pair(0, 1), make_pair(5,0));
+    EXPECT_DOUBLE_EQ(area(tTriangleI2), 2.5);
+    std::tuple<vertex2, vertex2, vertex2> tTriangleD(make_pair(2.5, 1), make_pair(-2.5, 3.5), make_pair(3.5, 8.9));
+    EXPECT_DOUBLE_EQ(area(tSquareD), 15.625);
+
 }
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);

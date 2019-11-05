@@ -9,8 +9,8 @@
 template <typename T1, typename T2>
 std::istream& operator>> (std::istream& is, std::pair<T1, T2>& p) {
     is >> p.first >> p.second;
-    if (typeid(T1) != typeid(T2)) {
-        std::cout << "hi\n";
+    if (is.fail()) {
+        throw std::logic_error("Wrong type");
     }
     return is;
 }
