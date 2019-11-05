@@ -61,12 +61,30 @@ TEST(TemplateCenterTest, TestingCenterOctagon) {
 TEST(TemplateCenterTest, TestingCenterSquare) {
     TSquare<int> square1(2, 2, 5, 4);
     std::pair pair1 = center(square1);
-    EXPECT_EQ(pair1.first,3);
+    EXPECT_EQ(pair1.first,3.5);
     EXPECT_EQ(pair1.second,3);
     TSquare<double> square2(2, 2, 5, 4);
     std::pair pair2 = center(square2);
     EXPECT_DOUBLE_EQ(pair2.first,3.5);
     EXPECT_DOUBLE_EQ(pair2.second,3);
+}
+
+TEST(TemplateAreaTestTuple, TestingAreaTuple) {
+    using vertex = std::pair<int, int>;
+    using std::make_pair;
+    using std::get;
+    std::tuple<vertex, vertex> tSquare(make_pair(1.1, 2.2), make_pair(3.3, 6.6));
+    EXPECT_EQ(get<0>(tSquare).first, 1);
+    EXPECT_EQ(get<0>(tSquare).second, 2);
+    EXPECT_EQ(get<1>(tSquare).first, 3);
+    EXPECT_EQ(get<1>(tSquare).second, 6);
+    std::tuple<vertex, vertex, vertex> tTriangle(make_pair(1.1, 2.2), make_pair(3.3, 6.6));
+    EXPECT_EQ(get<0>(tTriangle).first, 1);
+    EXPECT_EQ(get<0>(tTriangle).second, 2);
+    EXPECT_EQ(get<1>(tTriangle).first, 3);
+    EXPECT_EQ(get<1>(tTriangle).second, 6);
+    EXPECT_EQ(get<2>(tTriangle).first, 1);
+    EXPECT_EQ(get<2>(tTriangle).second, 2);
 }
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);

@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/test/test.cpp" "/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/cmake-build-debug/CMakeFiles/oop_exercise_04_test.dir/test/test.cpp.o"
+  "D:/Study/Labs2course/oop_exercise_04/test/test.cpp" "D:/Study/Labs2course/oop_exercise_04/cmake-build-debug/CMakeFiles/oop_exercise_04_test.dir/test/test.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 
@@ -16,8 +16,8 @@ set(CMAKE_CXX_TARGET_INCLUDE_PATH
 
 # Targets to which this target links.
 set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/cmake-build-debug/lib/googletest/googletest/CMakeFiles/gtest.dir/DependInfo.cmake"
-  "/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/cmake-build-debug/lib/googletest/googletest/CMakeFiles/gtest_main.dir/DependInfo.cmake"
+  "D:/Study/Labs2course/oop_exercise_04/cmake-build-debug/lib/googletest/googletest/CMakeFiles/gtest.dir/DependInfo.cmake"
+  "D:/Study/Labs2course/oop_exercise_04/cmake-build-debug/lib/googletest/googletest/CMakeFiles/gtest_main.dir/DependInfo.cmake"
   )
 
 # Fortran module output directory.
