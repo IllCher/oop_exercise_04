@@ -95,7 +95,6 @@ TEST(TemplateAreaTestTuple, TestingAreaTuple) {
     EXPECT_DOUBLE_EQ(area(tOctagonI2), 27.5);
     std::tuple<vertex2, vertex2, vertex2, vertex2, vertex2, vertex2, vertex2, vertex2> tOctagonD(make_pair(1.5, 2.6), make_pair(4.9, 1.34) , make_pair(4.54,-1.34), make_pair(1.4534, -3.213), make_pair(-1.065, -3.0932) , make_pair(-3.3434,-1.44), make_pair(-3.0001, 1.001), make_pair(-1.12, 2.435));
     EXPECT_DOUBLE_EQ(area(tOctagonD), 36.580140829999998);
-
 }
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
