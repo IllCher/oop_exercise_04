@@ -1,4 +1,7 @@
 cmake_minimum_required(VERSION 3.14)
 project(oop_exercise_04)
 set(CMAKE_CXX_STANDARD 17)
-add_executable(oop_exercise_04 main.cpp templates.h)
+add_subdirectory(lib/googletest)
+add_executable(oop_exercise_04 main.cpp src/templates.h)
+add_executable(oop_exercise_04_test test/test.cpp src/templates.h)
+target_link_libraries(oop_exercise_04_test gtest gtest_main)

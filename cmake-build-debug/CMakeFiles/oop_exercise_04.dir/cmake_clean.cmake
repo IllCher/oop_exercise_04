@@ -1,8 +1,9 @@
 file(REMOVE_RECURSE
-  "CMakeFiles/oop_exercise_04.dir/main.cpp.o"
-  "oop_exercise_04.pdb"
-  "oop_exercise_04.exe"
+  "CMakeFiles/oop_exercise_04.dir/main.cpp.obj"
   "liboop_exercise_04.dll.a"
+  "oop_exercise_04.exe"
+  "oop_exercise_04.exe.manifest"
+  "oop_exercise_04.pdb"
 )
 
 # Per-language clean rules from dependency scanning.

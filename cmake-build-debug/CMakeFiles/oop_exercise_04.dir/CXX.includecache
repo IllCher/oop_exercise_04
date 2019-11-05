@@ -6,15 +6,15 @@
 
 #IncludeRegexTransform: 
 
-/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/main.cpp
+D:/Study/Labs2course/oop_exercise_04/main.cpp
 iostream
 -
 tuple
 -
-templates.h
-/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/templates.h
+src/templates.h
+D:/Study/Labs2course/oop_exercise_04/src/templates.h
 
-/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/templates.h
+D:/Study/Labs2course/oop_exercise_04/src/templates.h
 utility
 -
 type_traits

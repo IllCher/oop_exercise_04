@@ -1,4 +1,5 @@
-C:\Users\Ilya\.CLion2019.2\system\cygwin_cmake\bin\cmake.exe -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - Unix Makefiles" /cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04
+"D:\Utilities\CLion 2019.2.2\bin\cmake\win\bin\cmake.exe" -DCMAKE_BUILD_TYPE=Debug -G "CodeBlocks - MinGW Makefiles" D:\Study\Labs2course\oop_exercise_04
+-- Could NOT find PythonInterp (missing: PYTHON_EXECUTABLE) 
 -- Configuring done
 -- Generating done
--- Build files have been written to: /cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/cmake-build-debug
+-- Build files have been written to: D:/Study/Labs2course/oop_exercise_04/cmake-build-debug

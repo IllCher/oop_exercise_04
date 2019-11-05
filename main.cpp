@@ -1,7 +1,7 @@
 
 #include <iostream>
 #include <tuple>
-#include "templates.h"
+#include "src/templates.h"
 int main() {
     std::string command;
     while (std::cin >> command) {
@@ -19,7 +19,7 @@ int main() {
             std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3;
             using vertex = std::pair<double, double>;
             using std::make_pair;
-            std::tuple<vertex, vertex, vertex>  tTriangle(make_pair(x1, y1),make_pair(x2, y2), make_pair(x3,y3));
+            std::tuple<vertex, vertex, vertex> tTriangle(make_pair(x1, y1),make_pair(x2, y2), make_pair(x3,y3));
             TTriangle<double> triangle(x1, y1, x2, y2, x3, y3);
             std::cout << "double triangle\n";
             std::cout << "coors: ";
