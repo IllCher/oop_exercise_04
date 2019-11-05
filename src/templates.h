@@ -10,13 +10,7 @@ std::ostream& operator<< (std::ostream& out, const std::pair<T1, T2>& p) {
     out << "(" << p.first << ", " << p.second << ")";
     return out;
 }
-template <typename T>
-T absolute(T a) {
- if (a < 0) {
-     return static_cast<T> (a*(-1));
- }
- return a;
-}
+
 template<class T>
 struct TTriangle {
     using type = T;
@@ -25,9 +19,9 @@ struct TTriangle {
     TTriangle(T x1, T y1, T x2, T y2, T x3, T y3) :
             A(x1, y1), B(x2, y2), C(x3, y3)
     {
-        T l = (sqrt((A.first - B.first) * (A.first - B.first) + (A.second - B.second) * (A.second - B.second)));
-        T k = (sqrt((B.first - C.first) * (B.first - C.first) + (B.second - C.second) * (B.second - C.second)));
-        T p = (sqrt((C.first - B.first) * (C.first - B.first) + (C.second - B.second) * (C.second - B.second)));
+        auto l = (sqrt((A.first - B.first) * (A.first - B.first) + (A.second - B.second) * (A.second - B.second)));
+        auto k = (sqrt((B.first - C.first) * (B.first - C.first) + (B.second - C.second) * (B.second - C.second)));
+        auto p = (sqrt((C.first - B.first) * (C.first - B.first) + (C.second - B.second) * (C.second - B.second)));
         if (l + k <= p || l + p <= k || p + k <= l) {
             throw std::logic_error("Triangle doesn't exist");
         }
@@ -66,9 +60,9 @@ struct IsTTriangle<F<T>> {
 };
 
 template <class T>
-typename std::enable_if<IsTTriangle<T>::value, typename T::type>::type
+typename std::enable_if<IsTTriangle<T>::value, double>::type
 area(const T& t) {
-    return absolute(((t.A.first - t.C.first) * (t.B.second - t.C.second) - (t.B.first - t.C.first) * (t.A.second - t.C.second)) / 2);
+    return (fabs(((t.A.first - t.C.first) * (t.B.second - t.C.second) - (t.B.first - t.C.first) * (t.A.second - t.C.second))) * 0.5);
 }
 
 template <class T>
@@ -95,9 +89,9 @@ struct IsTOctagon<F<T>> {
 };
 
 template <class T>
-typename std::enable_if<IsTOctagon<T>::value, typename T::type>::type
+typename std::enable_if<IsTOctagon<T>::value, double>::type
 area(const T& o) {
-    return static_cast<typename T::type>(absolute(((o.A.first * o.B.second) + (o.B.first * o.C.second) + (o.C.first * o.D.second) + (o.D.first * o.E.second) + (o.E.first * o.F.second) + (o.F.first * o.G.second) + (o.G.first * o.H.second) + (o.H.first * o.A.second) - (o.B.first * o.A.second) - (o.C.first * o.B.second) - (o.D.first * o.C.second) - (o.E.first * o.D.second) - (o.F.first * o.E.second) - (o.G.first * o.F.second) - (o.H.first * o.G.second) - (o.A.first * o.H.second)) / 2));
+    return fabs(((o.A.first * o.B.second) + (o.B.first * o.C.second) + (o.C.first * o.D.second) + (o.D.first * o.E.second) + (o.E.first * o.F.second) + (o.F.first * o.G.second) + (o.G.first * o.H.second) + (o.H.first * o.A.second) - (o.B.first * o.A.second) - (o.C.first * o.B.second) - (o.D.first * o.C.second) - (o.E.first * o.D.second) - (o.F.first * o.E.second) - (o.G.first * o.F.second) - (o.H.first * o.G.second) - (o.A.first * o.H.second)) * 0.5);
 }
 
 template <class T>
@@ -121,9 +115,9 @@ struct IsTSquare<F<T>> {
 };
 
 template <class T>
-typename std::enable_if<IsTSquare<T>::value, typename T::type>::type
+typename std::enable_if<IsTSquare<T>::value, double>::type
 area(const T& s) {
-    return static_cast<typename T::type>(((s.C.first - s.A.first) * (s.C.first - s.A.first) + (s.C.second - s.A.second) * (s.C.second - s.A.second))/2);
+    return ((s.C.first - s.A.first) * (s.C.first - s.A.first) + (s.C.second - s.A.second) * (s.C.second - s.A.second)) * 0.5;
 }
 
 template <class T>
@@ -140,16 +134,16 @@ void print(const TSquare<T>& s) {
 
 template <class T>
 T area(const std::tuple<std::pair<T,T>, std::pair<T,T>, std::pair<T,T>>& tTriangle) {
-    return absolute(((std::get<0>(tTriangle).first - std::get<2>(tTriangle).first) * (std::get<1>(tTriangle).second - std::get<2>(tTriangle).second) - (std::get<1>(tTriangle).first - std::get<2>(tTriangle).first) * (std::get<0>(tTriangle).second - std::get<2>(tTriangle).second)) / 2);
+    return fabs(((std::get<0>(tTriangle).first - std::get<2>(tTriangle).first) * (std::get<1>(tTriangle).second - std::get<2>(tTriangle).second) - (std::get<1>(tTriangle).first - std::get<2>(tTriangle).first) * (std::get<0>(tTriangle).second - std::get<2>(tTriangle).second)) * 0.5);
 }
 
 template <class T>
 T area(const std::tuple<std::pair<T, T>, std::pair<T, T>, std::pair<T, T>, std::pair<T, T>, std::pair<T, T>, std::pair<T, T>, std::pair<T, T>, std::pair<T, T>>& tOctagon) {
-    return absolute(((std::get<0>(tOctagon).first * std::get<1>(tOctagon).second) + (std::get<1>(tOctagon).first * std::get<2>(tOctagon).second) + (std::get<2>(tOctagon).first * std::get<3>(tOctagon).second) + (std::get<3>(tOctagon).first * std::get<4>(tOctagon).second) + (std::get<4>(tOctagon).first * std::get<5>(tOctagon).second) + (std::get<5>(tOctagon).first * std::get<6>(tOctagon).second) + (std::get<6>(tOctagon).first * std::get<7>(tOctagon).second) + (std::get<7>(tOctagon).first * std::get<0>(tOctagon).second) - (std::get<1>(tOctagon).first * std::get<0>(tOctagon).second) - (std::get<2>(tOctagon).first * std::get<1>(tOctagon).second) - (std::get<3>(tOctagon).first * std::get<2>(tOctagon).second) - (std::get<4>(tOctagon).first * std::get<3>(tOctagon).second) - (std::get<5>(tOctagon).first * std::get<4>(tOctagon).second) - (std::get<6>(tOctagon).first * std::get<5>(tOctagon).second) - (std::get<7>(tOctagon).first * std::get<6>(tOctagon).second) - (std::get<0>(tOctagon).first * std::get<7>(tOctagon).second)) / 2);
+    return fabs(((std::get<0>(tOctagon).first * std::get<1>(tOctagon).second) + (std::get<1>(tOctagon).first * std::get<2>(tOctagon).second) + (std::get<2>(tOctagon).first * std::get<3>(tOctagon).second) + (std::get<3>(tOctagon).first * std::get<4>(tOctagon).second) + (std::get<4>(tOctagon).first * std::get<5>(tOctagon).second) + (std::get<5>(tOctagon).first * std::get<6>(tOctagon).second) + (std::get<6>(tOctagon).first * std::get<7>(tOctagon).second) + (std::get<7>(tOctagon).first * std::get<0>(tOctagon).second) - (std::get<1>(tOctagon).first * std::get<0>(tOctagon).second) - (std::get<2>(tOctagon).first * std::get<1>(tOctagon).second) - (std::get<3>(tOctagon).first * std::get<2>(tOctagon).second) - (std::get<4>(tOctagon).first * std::get<3>(tOctagon).second) - (std::get<5>(tOctagon).first * std::get<4>(tOctagon).second) - (std::get<6>(tOctagon).first * std::get<5>(tOctagon).second) - (std::get<7>(tOctagon).first * std::get<6>(tOctagon).second) - (std::get<0>(tOctagon).first * std::get<7>(tOctagon).second)) * 0.5);
 }
 
 template <class T>
 T area(const std::tuple<std::pair<T, T>, std::pair<T, T>>& tSquare) {
-    return absolute(((std::get<1>(tSquare).first - std::get<0>(tSquare).first) * (std::get<1>(tSquare).first - std::get<0>(tSquare).first) + (std::get<1>(tSquare).second - std::get<0>(tSquare).second) * (std::get<1>(tSquare).second - std::get<0>(tSquare).second))/2);
+    return fabs(((std::get<1>(tSquare).first - std::get<0>(tSquare).first) * (std::get<1>(tSquare).first - std::get<0>(tSquare).first) + (std::get<1>(tSquare).second - std::get<0>(tSquare).second) * (std::get<1>(tSquare).second - std::get<0>(tSquare).second)) * 0.5);
 }
 #endif //TEMPLATES_H_

@@ -29,7 +29,7 @@ int main() {
         } else if (command == "oi") {
             int x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7, x8, y8;
             std::cin >> x1 >> y1 >> x2 >> y2 >> x3 >> y3 >> x4 >> y4 >> x5 >> y5 >> x6 >> y6 >> x7 >> y7 >> x8 >> y8 ;
-            using vertex = std::pair<double, double>;
+            using vertex = std::pair<int, int>;
             using std::make_pair;
             std::tuple<vertex, vertex, vertex, vertex, vertex, vertex, vertex, vertex> tOctagon(make_pair(x1, y1), make_pair(x2, y2), make_pair(x3, y3), make_pair(x4, y4), make_pair(x5, y5), make_pair(x6, y6), make_pair(x7, y7), make_pair(x8, y8));
             TOctagon<int> octagon(x1, y1, x2, y2, x3, y3, x4, y4, x5, y5, x6, y6, x7, y7, x8, y8);

@@ -296,7 +296,7 @@ cxxabi.h
 acxx_demangle.h
 -
 
-D:/Study/Labs2course/oop_exercise_04/src/templates.h
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/src/templates.h
 utility
 -
 type_traits
@@ -306,9 +306,9 @@ tuple
 cmath
 -
 
-D:/Study/Labs2course/oop_exercise_04/test/test.cpp
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/test/test.cpp
 gtest/gtest.h
 -
 ../src/templates.h
-D:/Study/Labs2course/oop_exercise_04/src/templates.h
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/src/templates.h
 
