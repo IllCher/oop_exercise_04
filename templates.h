@@ -24,13 +24,14 @@ struct TTriangle {
     vertex A, B, C;
     TTriangle(T x1, T y1, T x2, T y2, T x3, T y3) :
             A(x1, y1), B(x2, y2), C(x3, y3)
-    {       /* typename T::type l, k, p;
-        l = static_cast<typename T::type>(sqrt((A.first - B.first) * (A.first - B.first) + (A.second - B.second) * (A.second - B.second)));
-        k = static_cast<typename T::type>(sqrt((B.first - C.first) * (B.first - C.first) + (B.second - C.second) * (B.second - C.second)));
-        p = static_cast<typename T::type>(sqrt((C.first - B.first) * (C.first - B.first) + (C.second - B.second) * (C.second - B.second)));
+    {
+        auto l = (sqrt((A.first - B.first) * (A.first - B.first) + (A.second - B.second) * (A.second - B.second)));
+        auto k = (sqrt((B.first - C.first) * (B.first - C.first) + (B.second - C.second) * (B.second - C.second)));
+        auto p = (sqrt((C.first - B.first) * (C.first - B.first) + (C.second - B.second) * (C.second - B.second)));
         if (l + k <= p || l + p <= k || p + k <= l) {
+            std::cout << "Triangle doesn't exist\n";
             throw std::logic_error("Triangle doesn't exist");
-        }*/
+        }
     }
 
 };
