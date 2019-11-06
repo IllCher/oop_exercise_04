@@ -9,8 +9,8 @@ TEST(TriangleValidation, TestingValidation) {
 }
 
 TEST(TemplateAreaTest, TestingAreaTriangle) {
-    TTriangle<int> triangle1(0, 1, 2, -1, -2, -1);
-    EXPECT_EQ(area(triangle1), 4);
+    TTriangle<int> triangle1(0, 2, 2, -1, -3, -1);
+    EXPECT_EQ(area(triangle1), 7.5);
     TTriangle<double> triangle2(0, 1, 2, -1, -2, -1);
     EXPECT_DOUBLE_EQ(area(triangle2), 4);
 }

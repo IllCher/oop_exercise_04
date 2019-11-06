@@ -87,7 +87,7 @@ struct IsTTriangle<F<T>> {
 template <class T>
 typename std::enable_if<IsTTriangle<T>::value, double>::type
 area(const T& t) {
-    return (fabs(((t.A.first - t.C.first) * (t.B.second - t.C.second) - (t.B.first - t.C.first) * (t.A.second - t.C.second))) * 0.5);
+    return (fabs((t.A.first - t.C.first) * (t.B.second - t.C.second) - (t.B.first - t.C.first) * (t.A.second - t.C.second)) * 0.5);
 }
 
 template <class T>
@@ -98,7 +98,7 @@ void print(const TTriangle<T>& t) {
 template <class T>
 typename std::enable_if<IsTTriangle<T>::value, std::pair<double, double>>::type
 center(const T& t) {
-    double x0 = static_cast<double>(t.A.first + t.B.first + t.C.first) / 3;
+    double x0 = (t.A.first + t.B.first + t.C.first) / 3;
     double y0 = static_cast<double>(t.A.second + t.B.second + t.C.second) / 3;
     return std::make_pair(x0,y0);
 }
