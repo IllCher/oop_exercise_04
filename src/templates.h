@@ -71,7 +71,7 @@ void print(const TTriangle<T>& t) {
 }
 
 template <class T>
-typename std::enable_if<IsTTriangle<T>::value, std::pair<typename T::type, typename T::type>>::type
+typename std::enable_if<IsTTriangle<T>::value, std::pair<double, double>>::type
 center(const T& t) {
     typename T::type x0 = (t.A.first + t.B.first + t.C.first) / 3;
     typename T::type y0 = (t.A.second + t.B.second + t.C.second) / 3;
@@ -100,7 +100,7 @@ void print(const TOctagon<T>& o) {
 }
 
 template <class T>
-typename std::enable_if<IsTOctagon<T>::value, std::pair<typename T::type, typename T::type>>::type
+typename std::enable_if<IsTOctagon<T>::value, std::pair<double, double>>::type
 center(const T& o) {
     return std::make_pair((o.A.first + o.B.first + o.C.first + o.D.first + o.E.first + o.F.first + o.G.first + o.H.first) / 8,(o.A.second + o.B.second + o.C.second + o.D.second + o.E.second + o.F.second + o.G.second + o.H.second) / 8);
 }
@@ -121,7 +121,7 @@ area(const T& s) {
 }
 
 template <class T>
-typename std::enable_if<IsTSquare<T>::value, std::pair<typename T::type, typename T::type>>::type
+typename std::enable_if<IsTSquare<T>::value, std::pair<double, double>>::type
 center(const T& s) {
     return std::make_pair((s.A.first + s.C.first) / 2, (s.A.second + s.C.second) / 2);
 }
