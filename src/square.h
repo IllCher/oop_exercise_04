@@ -41,24 +41,24 @@ void TSquare<T>::print() const{
 }
 template <class T>
 bool TSquare<T>::is_square() const {
-    const T vec1_x = B.first - A.first;
-    const T vec1_y = B.second - A.second;
+    double vec1_x = B.first - A.first;
+    double vec1_y = B.second - A.second;
 
-    const T vec2_x = C.first - B.first;
-    const T vec2_y = C.second - B.second;
+    double vec2_x = C.first - B.first;
+    double vec2_y = C.second - B.second;
 
-    const T vec3_x = D.first - A.first;
-    const T vec3_y = D.second - A.second;
+    double vec3_x = D.first - A.first;
+    double vec3_y = D.second - A.second;
 
-    const T vec4_x = D.first - C.first;
-    const T vec4_y = D.second - C.second;
+    double vec4_x = D.first - C.first;
+    double vec4_y = D.second - C.second;
 
-    const T dotProduct1 = vec1_x * vec2_x + vec1_y * vec2_y;
-    const T dotProduct2 = vec3_x * vec1_x + vec3_y * vec1_y;
-    const T dotProduct3 = vec3_x * vec4_x + vec3_y * vec4_y;
+    double dotProduct1 = vec1_x * vec2_x + vec1_y * vec2_y;
+    double dotProduct2 = vec3_x * vec1_x + vec3_y * vec1_y;
+    double dotProduct3 = vec3_x * vec4_x + vec3_y * vec4_y;
 
-    const T vec1_length = sqrt(vec1_x * vec1_x + vec1_y * vec1_y);
-    const T vec2_length = sqrt(vec2_x * vec2_x + vec2_y * vec2_y);
+    double vec1_length = sqrt(vec1_x * vec1_x + vec1_y * vec1_y);
+    double vec2_length = sqrt(vec2_x * vec2_x + vec2_y * vec2_y);
 
     return dotProduct1 == 0 && dotProduct2 == 0 && dotProduct3 == 0 && vec1_length == vec2_length;
 }
