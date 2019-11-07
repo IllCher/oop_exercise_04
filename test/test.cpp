@@ -9,8 +9,8 @@ TEST(TriangleValidation, TestingValidation) {
 }
 
 TEST(TemplateAreaTest, TestingAreaTriangle) {
-    TTriangle<int> triangle1(0, 1, 2, -1, -2, -1);
-    EXPECT_EQ(area(triangle1), 4);
+    TTriangle<int> triangle1(0, 2, 2, -1, -3, -1);
+    EXPECT_EQ(area(triangle1), 7.5);
     TTriangle<double> triangle2(0, 1, 2, -1, -2, -1);
     EXPECT_DOUBLE_EQ(area(triangle2), 4);
 }
@@ -61,12 +61,40 @@ TEST(TemplateCenterTest, TestingCenterOctagon) {
 TEST(TemplateCenterTest, TestingCenterSquare) {
     TSquare<int> square1(2, 2, 5, 4);
     std::pair pair1 = center(square1);
-    EXPECT_EQ(pair1.first,3);
+    EXPECT_EQ(pair1.first,3.5);
     EXPECT_EQ(pair1.second,3);
     TSquare<double> square2(2, 2, 5, 4);
     std::pair pair2 = center(square2);
     EXPECT_DOUBLE_EQ(pair2.first,3.5);
     EXPECT_DOUBLE_EQ(pair2.second,3);
+}
+
+TEST(TemplateAreaTestTuple, TestingAreaTuple) {
+    using vertex1 = std::pair<int, int>;
+    using vertex2 = std::pair<double, double>;
+    using std::make_pair;
+    using std::get;
+
+    std::tuple<vertex1, vertex1> tSquareI1(make_pair(2, 0), make_pair(-2, 0));
+    EXPECT_EQ(area(tSquareI1), 8);
+    std::tuple<vertex1, vertex1> tSquareI2(make_pair(0, 0), make_pair(0, 1));
+    EXPECT_DOUBLE_EQ(area(tSquareI2), 0.5);
+    std::tuple<vertex2, vertex2> tSquareD(make_pair(2.5, 1), make_pair(-2.5, 3.5));
+    EXPECT_DOUBLE_EQ(area(tSquareD), 15.625);
+
+    std::tuple<vertex1, vertex1, vertex1> tTriangleI1(make_pair(0, 1), make_pair(2, -1) , make_pair(-2,-1));
+    EXPECT_EQ(area(tTriangleI1), 4);
+    std::tuple<vertex1, vertex1, vertex1> tTriangleI2(make_pair(0, 0), make_pair(0, 1), make_pair(5,0));
+    EXPECT_DOUBLE_EQ(area(tTriangleI2), 2.5);
+    std::tuple<vertex2, vertex2, vertex2> tTriangleD(make_pair(2.5, 1), make_pair(-2.5, 3.5), make_pair(3.7, 8.9));
+    EXPECT_DOUBLE_EQ(area(tTriangleD), 21.25);
+
+    std::tuple<vertex1, vertex1, vertex1, vertex1, vertex1, vertex1, vertex1, vertex1> tOctagonI1(make_pair(2, 2), make_pair(2, 5) , make_pair(4,7), make_pair(7, 7), make_pair(9, 5) , make_pair(9,2), make_pair(7, -1), make_pair(4, -1));
+    EXPECT_EQ(area(tOctagonI1), 46);
+    std::tuple<vertex1, vertex1, vertex1, vertex1, vertex1, vertex1, vertex1, vertex1> tOctagonI2(make_pair(1, 2), make_pair(4, 1) , make_pair(4,-1), make_pair(1, -3), make_pair(-1, -3) , make_pair(-3,-1), make_pair(-3, 1), make_pair(-1, 2));
+    EXPECT_DOUBLE_EQ(area(tOctagonI2), 27.5);
+    std::tuple<vertex2, vertex2, vertex2, vertex2, vertex2, vertex2, vertex2, vertex2> tOctagonD(make_pair(1.5, 2.6), make_pair(4.9, 1.34) , make_pair(4.54,-1.34), make_pair(1.4534, -3.213), make_pair(-1.065, -3.0932) , make_pair(-3.3434,-1.44), make_pair(-3.0001, 1.001), make_pair(-1.12, 2.435));
+    EXPECT_DOUBLE_EQ(area(tOctagonD), 36.580140829999998);
 }
 int main(int argc, char** argv) {
     testing::InitGoogleTest(&argc, argv);
