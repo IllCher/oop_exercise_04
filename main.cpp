@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <tuple>
 #include "src/templates.h"
@@ -18,13 +17,12 @@ int main() {
                 using std::make_pair;
                 vertex A, B, C;
                 std::cin >> A >> B >> C;
-                std::tuple<vertex, vertex, vertex> tTriangle(make_pair(A.first, A.second), make_pair(B.first, B.second),
-                                                             make_pair(C.first, C.second));
+                std::tuple<vertex, vertex, vertex> tTriangle(make_pair(A.first, A.second), make_pair(B.first, B.second), make_pair(C.first, C.second));
                 TTriangle<double> triangle(A.first, A.second, B.first, B.second, C.first, C.second);
                 std::cout << "double triangle\n";
                 std::cout << "coors: ";
-                print(triangle);
-                std::cout << "center: " << center(triangle) << "\n";
+                print(tTriangle);
+                std::cout << "center: " << center(tTriangle) << "\n";
                 std::cout << "area: " << area(tTriangle) << "\n";
             } else if (command == "oi") {
                 using vertex = std::pair<int, int>;
@@ -41,7 +39,7 @@ int main() {
                 std::cout << "coors: ";
                 print(octagon);
                 std::cout << "center: " << center(octagon) << "\n";
-                std::cout << "area: " << area(tOctagon) << "\n";
+                std::cout << "area: " << area(octagon) << "\n";
             } else if (command == "od") {
                 TOctagon<double> octagon(std::cin);
                 std::cout << "double octagon\n";
@@ -52,15 +50,15 @@ int main() {
             } else if (command == "si") {
                 using vertex = std::pair<int, int>;
                 using std::make_pair;
-                vertex A, C;
-                std::cin >> A >> C;
+                vertex A, B, C, D;
+                std::cin >> A >> B >> C >> D;
                 std::tuple<vertex, vertex> tSquare(make_pair(A.first, A.second), make_pair(C.first, C.second));
-                TSquare<int> square(A.first, A.second, C.first, C.second);
+                TSquare<int> square(A.first, A.second, B.first, B.second, C.first, C.second, D.first, D.second);
                 std::cout << "int square\n";
                 std::cout << "coors: ";
                 print(square);
                 std::cout << "center: " << center(square) << "\n";
-                std::cout << "area: " << area(tSquare) << "\n";
+                std::cout << "area: " << area(square) << "\n";
             } else if (command == "sd") {
                 TSquare<double> square(std::cin);
                 std::cout << "double square\n";

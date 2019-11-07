@@ -1,8 +1,8 @@
-# Install script for directory: D:/Study/Labs2course/oop_exercise_04/lib/googletest
+# Install script for directory: /cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/lib/googletest
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
-  set(CMAKE_INSTALL_PREFIX "C:/Program Files (x86)/oop_exercise_04")
+  set(CMAKE_INSTALL_PREFIX "/usr/local")
 endif()
 string(REGEX REPLACE "/$" "" CMAKE_INSTALL_PREFIX "${CMAKE_INSTALL_PREFIX}")
 
@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("D:/Study/Labs2course/oop_exercise_04/cmake-build-debug/lib/googletest/googlemock/cmake_install.cmake")
+  include("/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/cmake-build-debug/lib/googletest/googlemock/cmake_install.cmake")
 
 endif()
 

@@ -296,7 +296,11 @@ cxxabi.h
 acxx_demangle.h
 -
 
-D:/Study/Labs2course/oop_exercise_04/src/templates.h
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/src/octagon.h
+
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/src/square.h
+
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/src/templates.h
 utility
 -
 type_traits
@@ -307,10 +311,22 @@ cmath
 -
 typeinfo
 -
+triangle.h
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/src/triangle.h
+octagon.h
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/src/octagon.h
+square.h
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/src/square.h
+vertex.h
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/src/vertex.h
 
-D:/Study/Labs2course/oop_exercise_04/test/test.cpp
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/src/triangle.h
+
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/src/vertex.h
+
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/test/test.cpp
 gtest/gtest.h
 -
 ../src/templates.h
-D:/Study/Labs2course/oop_exercise_04/src/templates.h
+/cygdrive/c/Users/Ilya/Desktop/Labs2course/oop_exercise_04/src/templates.h
 

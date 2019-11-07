@@ -23,9 +23,9 @@ TEST(TemplateAreaTest, TestingAreaOctagon) {
 }
 
 TEST(TemplateAreaTest, TestingAreaSquare) {
-    TSquare<int> square1(2, 0, -2, 0);
+    TSquare<int> square1(2, 0, 0, -2, -2, 0, 0, 2);
     EXPECT_EQ(area(square1), 8);
-    TSquare<double> square2(2, 0, -2, 0);
+    TSquare<double> square2(2, 0, 0, -2, -2, 0, 0, 2);
     EXPECT_DOUBLE_EQ(area(square2), 8);
 }
 
@@ -59,14 +59,14 @@ TEST(TemplateCenterTest, TestingCenterOctagon) {
 }
 
 TEST(TemplateCenterTest, TestingCenterSquare) {
-    TSquare<int> square1(2, 2, 5, 4);
+    TSquare<int> square1(0, 0, 0, 2, 2, 2, 2, 0);
     std::pair pair1 = center(square1);
-    EXPECT_EQ(pair1.first,3.5);
-    EXPECT_EQ(pair1.second,3);
-    TSquare<double> square2(2, 2, 5, 4);
+    EXPECT_EQ(pair1.first,1);
+    EXPECT_EQ(pair1.second,1);
+    TSquare<double> square2(0, 0, 0, 2, 2, 2, 2, 0);
     std::pair pair2 = center(square2);
-    EXPECT_DOUBLE_EQ(pair2.first,3.5);
-    EXPECT_DOUBLE_EQ(pair2.second,3);
+    EXPECT_DOUBLE_EQ(pair2.first,1);
+    EXPECT_DOUBLE_EQ(pair2.second,1);
 }
 
 TEST(TemplateAreaTestTuple, TestingAreaTuple) {
@@ -75,11 +75,11 @@ TEST(TemplateAreaTestTuple, TestingAreaTuple) {
     using std::make_pair;
     using std::get;
 
-    std::tuple<vertex1, vertex1> tSquareI1(make_pair(2, 0), make_pair(-2, 0));
+    std::tuple<vertex1, vertex1, vertex1, vertex1> tSquareI1(make_pair(2, 0), make_pair(-2, 0), make_pair(0, 2), make_pair(-2, 0));
     EXPECT_EQ(area(tSquareI1), 8);
-    std::tuple<vertex1, vertex1> tSquareI2(make_pair(0, 0), make_pair(0, 1));
-    EXPECT_DOUBLE_EQ(area(tSquareI2), 0.5);
-    std::tuple<vertex2, vertex2> tSquareD(make_pair(2.5, 1), make_pair(-2.5, 3.5));
+    std::tuple<vertex1, vertex1, vertex1, vertex1> tSquareI2(make_pair(0, 0), make_pair(0, 1), make_pair(1, 1), make_pair(1, 0));
+    EXPECT_DOUBLE_EQ(area(tSquareI2), 1.0);
+    std::tuple<vertex2, vertex2, vertex2, vertex2> tSquareD(make_pair(2.5, 1), make_pair(-1.25, -0.25), make_pair(-2.5, 3.5), make_pair(1.25, 4.75));
     EXPECT_DOUBLE_EQ(area(tSquareD), 15.625);
 
     std::tuple<vertex1, vertex1, vertex1> tTriangleI1(make_pair(0, 1), make_pair(2, -1) , make_pair(-2,-1));

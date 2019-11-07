@@ -5,170 +5,159 @@
 #include <tuple>
 #include <cmath>
 #include <typeinfo>
+#include "triangle.h"
+#include "octagon.h"
+#include "square.h"
+#include "vertex.h"
+template<class T>
+struct is_vertex : std::false_type {};
 
-template <typename T1, typename T2>
-std::istream& operator>> (std::istream& is, std::pair<T1, T2>& p) {
-    is >> p.first >> p.second;
-    if (is.fail()) {
-        throw std::logic_error("Wrong type");
-    }
-    return is;
+template<class T>
+struct is_vertex<std::pair<T,T>> : std::true_type {};
+
+template<class T>
+struct is_figurelike_tuple : std::false_type {};
+
+template<class Head, class... Tail>
+struct is_figurelike_tuple<std::tuple<Head, Tail...>> :
+        std::conjunction<is_vertex<Head>,
+                std::is_same<Head, Tail>...> {};
+
+template<class Type, size_t SIZE>
+struct is_figurelike_tuple<std::array<Type, SIZE>> :
+        is_vertex<Type> {};
+
+template<class T>
+inline constexpr bool is_figurelike_tuple_v =
+        is_figurelike_tuple<T>::value;
+
+template<class T, class = void>
+struct has_print_method : std::false_type {};
+
+template<class T>
+struct has_print_method<T,
+        std::void_t<decltype(std::declval<const T>().print())>> :
+        std::true_type {};
+
+template<class T>
+inline constexpr bool has_print_method_v = has_print_method<T>::value;
+
+template<class T>
+std::enable_if_t<has_print_method_v<T>, void>
+print(const T& figure) {
+    figure.print();
 }
 
-template <typename T1, typename T2>
-std::ostream& operator<< (std::ostream& out, const std::pair<T1, T2>& p) {
-    out << "(" << p.first << ", " << p.second << ")";
-    return out;
+template<size_t ID, class T>
+void single_print(const T& t) {
+    std::cout << std::get<ID>(t);
+    return;
+}
+
+template<size_t ID, class T>
+void Recursiveprint(const T& t) {
+    if constexpr (ID < std::tuple_size_v<T>){
+        single_print<ID>(t);
+        Recursiveprint<ID+1>(t);
+        return ;
+    }
+    return;
 }
 
 template<class T>
-struct TTriangle {
-    using type = T;
-    using vertex = std::pair<T,T>;
-    vertex A, B, C;
-    TTriangle(T x1, T y1, T x2, T y2, T x3, T y3) :
-            A(x1, y1), B(x2, y2), C(x3, y3)
-    {
-        double l = (sqrt((A.first - B.first) * (A.first - B.first) + (A.second - B.second) * (A.second - B.second)));
-        double k = (sqrt((B.first - C.first) * (B.first - C.first) + (B.second - C.second) * (B.second - C.second)));
-        double p = (sqrt((C.first - B.first) * (C.first - B.first) + (C.second - B.second) * (C.second - B.second)));
-        if (l + k <= p || l + p <= k || p + k <= l) {
-            throw std::logic_error("Triangle doesn't exist");
-        }
-    }
-    TTriangle(std::istream& is) {
-        is >> A >> B >> C;
-        double l = (sqrt((A.first - B.first) * (A.first - B.first) + (A.second - B.second) * (A.second - B.second)));
-        double k = (sqrt((B.first - C.first) * (B.first - C.first) + (B.second - C.second) * (B.second - C.second)));
-        double p = (sqrt((C.first - B.first) * (C.first - B.first) + (C.second - B.second) * (C.second - B.second)));
-        if (l + k <= p || l + p <= k || p + k <= l) {
-            throw std::logic_error("Triangle doesn't exist");
-        }
-    }
+std::enable_if_t<is_figurelike_tuple_v<T>, void>
+print(const T& fake) {
+    return Recursiveprint<0>(fake);
+}
 
-};
+template<class T, class = void>
+struct has_center_method : std::false_type {};
 
 template<class T>
-struct TOctagon{
-    using type = T;
-    using vertex = std::pair<T,T>;
-    vertex A, B, C, D, E, F, G, H;
-    TOctagon(T x1, T y1, T x2, T y2, T x3, T y3, T x4, T y4, T x5, T y5, T x6, T y6, T x7, T y7, T x8, T y8) :
-            A(x1, y1), B(x2, y2), C(x3, y3), D(x4, y4), E(x5, y5), F(x6, y6), G(x7, y7), H(x8, y8)
-    {}
-    TOctagon(std::istream& is) {
-        std::cin >> A >> B >> C >> D >> E >> F >> G >> H;
-    }
-};
+struct has_center_method<T,
+        std::void_t<decltype(std::declval<const T>().center())>> :
+        std::true_type {};
 
 template<class T>
-struct TSquare {
-    using type = T;
-    using vertex = std::pair<T,T>;
-    vertex A, C;
-    TSquare(T x1, T y1, T x2, T y2) :
-            A(x1, y1), C(x2, y2)
-    {}
-    TSquare(std::istream& is) {
-        std::cin >> A >> C;
+inline constexpr bool has_center_method_v =
+        has_center_method<T>::value;
+
+template<class T>
+std::enable_if_t<has_center_method_v<T>, std::pair<double,double>>
+center(const T& figure) {
+    return figure.center();
+}
+
+template<class T>
+inline constexpr const int tuple_size_v = std::tuple_size<T>::value;
+
+template<size_t ID, class T>
+std::pair<double,double> single_center(const T& t) {
+    std::pair<double,double> v;
+    v.first = std::get<ID>(t).first;
+    v.second = std::get<ID>(t).second;
+    //v /= std::tuple_size_v<T>;
+    return v;
+}
+
+template<size_t ID, class T>
+std::pair<double,double> Recursivecenter(const T& t) {
+    if constexpr (ID < std::tuple_size_v<T>){
+        return  (single_center<ID>(t) + Recursivecenter<ID+1>(t));
+    } else {
+        std::pair<double,double> v;
+        v.first = 0;
+        v.second = 0;
+        return v;
     }
-};
-
-template <class T>
-struct IsTTriangle {
-    static constexpr bool value = false;
-};
-
-template <template <class...> class F, class T>
-struct IsTTriangle<F<T>> {
-    static constexpr bool value = std::is_same<F<T>, TTriangle<T>>::value;
-};
-
-template <class T>
-typename std::enable_if<IsTTriangle<T>::value, double>::type //возвращаемый тип(если существует треугольник с типом T, то возвращается double;
-area(const T& t) {
-    return (fabs((t.A.first - t.C.first) * (t.B.second - t.C.second) - (t.B.first - t.C.first) * (t.A.second - t.C.second)) * 0.5);
 }
 
-template <class T>
-void print(const TTriangle<T>& t) {
-    std::cout << t.A << " " << t.B << " " << t.C << "\n";
+template<class T>
+std::enable_if_t<is_figurelike_tuple_v<T>, std::pair<double,double>>
+center(const T& fake) {
+    return Recursivecenter<0>(fake);
 }
 
-template <class T>
-typename std::enable_if<IsTTriangle<T>::value, std::pair<double, double>>::type
-center(const T& t) {
-    double x0 = (t.A.first + t.B.first + t.C.first) / 3;
-    double y0 = static_cast<double>(t.A.second + t.B.second + t.C.second) / 3;
-    return std::make_pair(x0,y0);
+template<class T, class = void>
+struct has_area_method : std::false_type {};
+
+template<class T>
+struct has_area_method<T,
+        std::void_t<decltype(std::declval<const T>().area())>> :
+        std::true_type {};
+
+template<class T>
+inline constexpr bool has_area_method_v = has_area_method<T>::value;
+
+template<class T>
+std::enable_if_t<has_area_method_v<T>, double>
+area(const T& figure) {
+    return figure.area();
 }
 
-template <class T>
-struct IsTOctagon {
-    static constexpr bool value = false;
-};
-
-template <template <class...> class F, class T>
-struct IsTOctagon<F<T>> {
-    static constexpr bool value = std::is_same<F<T>, TOctagon<T>>::value;
-};
-
-template <class T>
-typename std::enable_if<IsTOctagon<T>::value, double>::type
-area(const T& o) {
-    return fabs(((o.A.first * o.B.second) + (o.B.first * o.C.second) + (o.C.first * o.D.second) + (o.D.first * o.E.second) + (o.E.first * o.F.second) + (o.F.first * o.G.second) + (o.G.first * o.H.second) + (o.H.first * o.A.second) - (o.B.first * o.A.second) - (o.C.first * o.B.second) - (o.D.first * o.C.second) - (o.E.first * o.D.second) - (o.F.first * o.E.second) - (o.G.first * o.F.second) - (o.H.first * o.G.second) - (o.A.first * o.H.second)) * 0.5);
+template<size_t ID, class T>
+double single_area(const T& t) {
+    const auto& a = std::get<0>(t);
+    const auto& b = std::get<ID - 1>(t);
+    const auto& c = std::get<ID>(t);
+    const double dx1 = b.first - a.first;
+    const double dy1 = b.second - a.second;
+    const double dx2 = c.first - a.first;
+    const double dy2 = c.second - a.second;
+    return std::abs(dx1 * dy2 - dy1 * dx2) * 0.5;
 }
 
-template <class T>
-void print(const TOctagon<T>& o) {
-    std::cout << o.A << " " << o.B << " " << o.C << " " << o.D << " " << o.E << " " << o.F << " " << o.G << " " << o.H << "\n";
+template<size_t ID, class T>
+double Recursivearea(const T& t) {
+    if constexpr (ID < std::tuple_size_v<T>){
+        return single_area<ID>(t) + Recursivearea<ID + 1>(t);
+    }
+    return 0;
 }
 
-template <class T>
-typename std::enable_if<IsTOctagon<T>::value, std::pair<double, double>>::type
-center(const T& o) {
-    return std::make_pair(static_cast<double>(o.A.first + o.B.first + o.C.first + o.D.first + o.E.first + o.F.first + o.G.first + o.H.first) / 8,static_cast<double>(o.A.second + o.B.second + o.C.second + o.D.second + o.E.second + o.F.second + o.G.second + o.H.second) / 8);
-}
-template <class T>
-struct IsTSquare {
-    static constexpr bool value = false;
-};
-
-template <template <class...> class F, class T>
-struct IsTSquare<F<T>> {
-    static constexpr bool value = std::is_same<F<T>, TSquare<T>>::value;
-};
-
-template <class T>
-typename std::enable_if<IsTSquare<T>::value, double>::type
-area(const T& s) {
-    return ((s.C.first - s.A.first) * (s.C.first - s.A.first) + (s.C.second - s.A.second) * (s.C.second - s.A.second)) * 0.5;
-}
-
-template <class T>
-typename std::enable_if<IsTSquare<T>::value, std::pair<double, double>>::type
-center(const T& s) {
-    return std::make_pair(static_cast<double>(s.A.first + s.C.first) / 2, static_cast<double>(s.A.second + s.C.second) / 2);
-}
-
-template <class T>
-void print(const TSquare<T>& s) {
-    std::pair m = center(s);
-    std::cout << s.A << " " <<  std::make_pair(m.first - s.C.second + m.second, m.second + s.C.first - m.first) << " " << s.C  << " " << std::make_pair(m.first - s.A.second + m.second, m.second + s.A.first - m.first) << "\n";
-}
-
-template <class T>
-double area(const std::tuple<std::pair<T,T>, std::pair<T,T>, std::pair<T,T>>& tTriangle) {
-    return fabs(((std::get<0>(tTriangle).first - std::get<2>(tTriangle).first) * (std::get<1>(tTriangle).second - std::get<2>(tTriangle).second) - (std::get<1>(tTriangle).first - std::get<2>(tTriangle).first) * (std::get<0>(tTriangle).second - std::get<2>(tTriangle).second)) * 0.5);
-}
-
-template <class T>
-double area(const std::tuple<std::pair<T, T>, std::pair<T, T>, std::pair<T, T>, std::pair<T, T>, std::pair<T, T>, std::pair<T, T>, std::pair<T, T>, std::pair<T, T>>& tOctagon) {
-    return fabs(((std::get<0>(tOctagon).first * std::get<1>(tOctagon).second) + (std::get<1>(tOctagon).first * std::get<2>(tOctagon).second) + (std::get<2>(tOctagon).first * std::get<3>(tOctagon).second) + (std::get<3>(tOctagon).first * std::get<4>(tOctagon).second) + (std::get<4>(tOctagon).first * std::get<5>(tOctagon).second) + (std::get<5>(tOctagon).first * std::get<6>(tOctagon).second) + (std::get<6>(tOctagon).first * std::get<7>(tOctagon).second) + (std::get<7>(tOctagon).first * std::get<0>(tOctagon).second) - (std::get<1>(tOctagon).first * std::get<0>(tOctagon).second) - (std::get<2>(tOctagon).first * std::get<1>(tOctagon).second) - (std::get<3>(tOctagon).first * std::get<2>(tOctagon).second) - (std::get<4>(tOctagon).first * std::get<3>(tOctagon).second) - (std::get<5>(tOctagon).first * std::get<4>(tOctagon).second) - (std::get<6>(tOctagon).first * std::get<5>(tOctagon).second) - (std::get<7>(tOctagon).first * std::get<6>(tOctagon).second) - (std::get<0>(tOctagon).first * std::get<7>(tOctagon).second))*0.5);
-}
-
-template <class T>
-double area(const std::tuple<std::pair<T, T>, std::pair<T, T>>& tSquare) {
-    return fabs(((std::get<1>(tSquare).first - std::get<0>(tSquare).first) * (std::get<1>(tSquare).first - std::get<0>(tSquare).first) + (std::get<1>(tSquare).second - std::get<0>(tSquare).second) * (std::get<1>(tSquare).second - std::get<0>(tSquare).second)) * 0.5);
+template<class T>
+std::enable_if_t<is_figurelike_tuple_v<T>, double>
+area(const T& fake) {
+    return Recursivearea<2>(fake);
 }
 #endif //TEMPLATES_H_
