@@ -20,7 +20,7 @@ struct TSquare {
     std::pair<double,double> center() const;
     void print() const;
     double area() const;
-    bool is_square() const;
+    bool is_square();
 };
 
 template <class T>
@@ -40,7 +40,7 @@ void TSquare<T>::print() const{
     std::cout << A << " " << B << " " << C  << " " << D << "\n";
 }
 template <class T>
-bool TSquare<T>::is_square() const {
+bool TSquare<T>::is_square() {
     double vec1_x = B.first - A.first;
     double vec1_y = B.second - A.second;
 
@@ -53,13 +53,47 @@ bool TSquare<T>::is_square() const {
     double vec4_x = D.first - C.first;
     double vec4_y = D.second - C.second;
 
-    double dotProduct1 = vec1_x * vec2_x + vec1_y * vec2_y;
-    double dotProduct2 = vec3_x * vec1_x + vec3_y * vec1_y;
-    double dotProduct3 = vec3_x * vec4_x + vec3_y * vec4_y;
+    double vecAC_x = C.first - A.first;
+    double vecAC_y = C.second - A.second;
 
     double vec1_length = sqrt(vec1_x * vec1_x + vec1_y * vec1_y);
     double vec2_length = sqrt(vec2_x * vec2_x + vec2_y * vec2_y);
+    double vec3_length = sqrt(vec3_x * vec3_x + vec3_y * vec3_y);
+    double vec4_length = sqrt(vec4_x * vec4_x + vec4_y * vec4_y);
+    double vec_length = sqrt(vecAC_x*vecAC_x + vecAC_y*vecAC_y);
 
-    return dotProduct1 == 0 && dotProduct2 == 0 && dotProduct3 == 0 && vec1_length == vec2_length;
+    if (vec_length < vec1_length) {
+        std::pair<T,T> tmp;
+        tmp.first = C.first;
+        tmp.second = C.second;
+        C.first = B.first;
+        C.second = B.second;
+        B.first = tmp.first;
+        B.second = tmp.second;
+    }
+    if (vec_length < vec3_length) {
+        std::pair<T,T> tmp;
+        tmp.first = C.first;
+        tmp.second = C.second;
+        C.first = D.first;
+        C.second = D.second;
+        D.first = tmp.first;
+        D.second = tmp.second;
+    }
+    vec1_x = B.first - A.first;
+    vec1_y = B.second - A.second;
+
+    vec2_x = C.first - B.first;
+    vec2_y = C.second - B.second;
+
+    vec3_x = D.first - A.first;
+    vec3_y = D.second - A.second;
+
+    vec4_x = D.first - C.first;
+    vec4_y = D.second - C.second;
+    double dotProduct1 = vec1_x * vec2_x + vec1_y * vec2_y;
+    double dotProduct2 = vec3_x * vec1_x + vec3_y * vec1_y;
+    double dotProduct3 = vec3_x * vec4_x + vec3_y * vec4_y;
+    return dotProduct1 == 0 && dotProduct2 == 0 && dotProduct3 == 0 && vec1_length == vec4_length;
 }
 #endif //OOP_EXERCISE_04_SQUARE_H
