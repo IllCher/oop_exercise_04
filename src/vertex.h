@@ -11,7 +11,7 @@ std::istream& operator>> (std::istream& is, std::pair<T1, T2>& p) {
 
 template <typename T1, typename T2>
 std::ostream& operator<< (std::ostream& out, const std::pair<T1, T2>& p) {
-    out << "(" << p.first << ", " << p.second << ")";
+    out << "(" << p.first << ", " << p.second << ") ";
     return out;
 }
 
@@ -24,7 +24,7 @@ std::pair<T,T> operator+(std::pair<T,T> lhs, std::pair<T,T> rhs){
 }
 
 template<class T>
-std::pair<T,T> operator/(std::pair<T,T> vertex, double val) {
+std::pair<T, T> operator/=(std::pair<T,T> vertex, double val) {
     vertex.first = vertex.first / val;
     vertex.second = vertex.second / val;
     return vertex;

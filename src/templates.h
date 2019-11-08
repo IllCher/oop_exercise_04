@@ -79,8 +79,7 @@ struct has_center_method<T,
         std::true_type {};
 
 template<class T>
-inline constexpr bool has_center_method_v =
-        has_center_method<T>::value;
+inline constexpr bool has_center_method_v = has_center_method<T>::value;
 
 template<class T>
 std::enable_if_t<has_center_method_v<T>, std::pair<double,double>>
@@ -96,7 +95,7 @@ std::pair<double,double> single_center(const T& t) {
     std::pair<double,double> v;
     v.first = std::get<ID>(t).first;
     v.second = std::get<ID>(t).second;
-    //v /= std::tuple_size_v<T>;
+    v /= std::tuple_size_v<T>;
     return v;
 }
 

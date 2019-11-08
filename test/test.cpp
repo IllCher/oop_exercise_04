@@ -6,6 +6,7 @@ TEST(TriangleValidation, TestingValidation) {
     ASSERT_NO_THROW(TTriangle(2.2, 3.2, 5.32, 6.7, 89.43, -143.3));
     ASSERT_ANY_THROW(TTriangle(0, 0, 0, 0, 1, 1));
     ASSERT_ANY_THROW(TTriangle(0.0, 0.0, 0.0, 0.0, 1.1, 1.1));
+    ASSERT_ANY_THROW(TSquare(0, 0, 1, 1, 5, 9, 8, 8));
 }
 
 TEST(TemplateAreaTest, TestingAreaTriangle) {
