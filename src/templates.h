@@ -90,16 +90,25 @@ center(const T& figure) {
 template<class T>
 inline constexpr const int tuple_size_v = std::tuple_size<T>::value;
 
-template<size_t ID, class T>
+/*template<size_t ID, class T>
 std::pair<double,double> single_center(const T& t) {
     std::pair<double,double> v;
     v.first = std::get<ID>(t).first;
     v.second = std::get<ID>(t).second;
     v /= std::tuple_size_v<T>;
     return v;
+}*/
+
+template<size_t ID, class T>
+double single_center_x(const T& t) {
+    return std::get<ID>(t).first / std::tuple_size_v<T>;
 }
 
 template<size_t ID, class T>
+double single_center_y(const T& t) {
+    return std::get<ID>(t).second / std::tuple_size_v<T>;
+}
+/*template<size_t ID, class T>
 std::pair<double,double> Recursivecenter(const T& t) {
     if constexpr (ID < std::tuple_size_v<T>){
         return  (single_center<ID>(t) + Recursivecenter<ID+1>(t));
@@ -109,14 +118,37 @@ std::pair<double,double> Recursivecenter(const T& t) {
         v.second = 0;
         return v;
     }
-}
-
+}*/
+/*
 template<class T>
 std::enable_if_t<is_figurelike_tuple_v<T>, std::pair<double,double>>
 center(const T& fake) {
     return Recursivecenter<0>(fake);
+}*/
+
+template<size_t ID, class T>
+double recursive_center_x(const T& t) {
+    if constexpr (ID < std::tuple_size_v<T>) {
+        return single_center_x<ID>(t) + recursive_center_x<ID + 1>(t);
+    } else {
+        return 0;
+    }
 }
 
+template<size_t ID, class T>
+double recursive_center_y(const T& t) {
+    if constexpr (ID < std::tuple_size_v<T>) {
+        return single_center_y<ID>(t) + recursive_center_y<ID + 1>(t);
+    } else {
+        return 0;
+    }
+}
+
+template<class T>
+std::enable_if_t<is_figurelike_tuple_v<T>, std::pair<double, double>>
+center(const T& tup) {
+    return {recursive_center_x<0>(tup), recursive_center_y<0>(tup)};
+}
 template<class T, class = void>
 struct has_area_method : std::false_type {};
 
